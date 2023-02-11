@@ -13,9 +13,20 @@ function core() {
   try {
     checkPkgVersion();
     checkNodeVersion();
+    rootCheck();
   } catch (e) {
     log.error(e.message);
   }
+}
+
+async function rootCheck() {
+  import("root-check")
+    .then((result) => {
+      result.default();
+    })
+    .catch((e) => {
+      throw new Error(e);
+    });
 }
 
 function checkNodeVersion() {
