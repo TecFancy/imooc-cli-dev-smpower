@@ -4,6 +4,7 @@ module.exports = core;
 
 const semver = require("semver");
 const colors = require("colors/safe");
+const userHome = require("user-home");
 const log = require("@smpower-cli/log");
 
 const constant = require("./const");
@@ -14,19 +15,24 @@ function core() {
     checkPkgVersion();
     checkNodeVersion();
     rootCheck();
+    checkUserHome();
   } catch (e) {
     log.error(e.message);
   }
 }
 
+async function checkUserHome() {
+  await import("path-exists").then((result) => {
+    if (!userHome || result.pathExists(userHome)) {
+      throw new Error(colors.red("当前登陆用户主目录不存在"));
+    }
+  });
+}
+
 async function rootCheck() {
-  import("root-check")
-    .then((result) => {
-      result.default();
-    })
-    .catch((e) => {
-      throw new Error(e);
-    });
+  await import("root-check").then((result) => {
+    result.default();
+  });
 }
 
 function checkNodeVersion() {
@@ -42,6 +48,5 @@ function checkNodeVersion() {
 }
 
 function checkPkgVersion() {
-  console.log(pkg.version);
   log.notice("cli", pkg.version);
 }
