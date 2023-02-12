@@ -10,20 +10,35 @@ const log = require("@smpower-cli/log");
 const constant = require("./const");
 const pkg = require("../package.json");
 
+let args;
+
 function core() {
   try {
     checkPkgVersion();
     checkNodeVersion();
     rootCheck();
     checkUserHome();
+    checkInputArgs();
   } catch (e) {
     log.error(e.message);
   }
 }
 
+function checkInputArgs() {
+  const minimist = require("minimist");
+  args = minimist(process.argv.slice(2));
+  checkArgs();
+}
+
+function checkArgs() {
+  if (args.debug) process.env.LOG_LEVEL = "verbose";
+  else process.env.LOG_LEVEL = "info";
+  log.level = process.env.LOG_LEVEL;
+}
+
 async function checkUserHome() {
   await import("path-exists").then((result) => {
-    if (!userHome || result.pathExists(userHome)) {
+    if (!userHome || !result.pathExists(userHome)) {
       throw new Error(colors.red("当前登陆用户主目录不存在"));
     }
   });
