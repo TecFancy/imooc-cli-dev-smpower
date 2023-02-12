@@ -2,6 +2,7 @@
 
 module.exports = core;
 
+const path = require("path");
 const semver = require("semver");
 const colors = require("colors/safe");
 const userHome = require("user-home");
@@ -11,17 +12,43 @@ const constant = require("./const");
 const pkg = require("../package.json");
 
 let args;
+let config;
 
-function core() {
+async function core() {
   try {
     checkPkgVersion();
     checkNodeVersion();
-    rootCheck();
-    checkUserHome();
+    await rootCheck();
+    await checkUserHome();
     checkInputArgs();
+    await checkEnv();
   } catch (e) {
     log.error(e.message);
   }
+}
+
+async function checkEnv() {
+  const dotenv = require("dotenv");
+  const dotenvPath = path.resolve(userHome, ".env");
+  await import("path-exists").then((result) => {
+    if (result.pathExists(dotenvPath)) {
+      dotenv.config({ path: dotenvPath });
+    }
+  });
+  createDefaultConfig();
+  console.log("环境变量", process.env.CLI_HOME_PATH);
+}
+
+function createDefaultConfig() {
+  const cliConfig = {
+    home: userHome,
+  };
+  if (process.env.CLI_HOME) {
+    cliConfig["cliHome"] = path.join(userHome, process.env.CLI_HOME);
+  } else {
+    cliConfig["cliHome"] = path.join(userHome, constant.DEFAULT_CLI_HOME);
+  }
+  process.env.CLI_HOME_PATH = cliConfig.cliHome;
 }
 
 function checkInputArgs() {
