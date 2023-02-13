@@ -22,9 +22,29 @@ async function core() {
     await checkUserHome();
     checkInputArgs();
     await checkEnv();
+    await checkGlobalUpdate();
   } catch (e) {
     log.error(e.message);
   }
+}
+
+async function checkGlobalUpdate() {
+  // 1. 获取当前版本号和模块名
+  const currentVersion = pkg.version;
+  const npmName = pkg.name;
+  // 2. 调用 npm API，获取所有版本号
+  const { getNpmSemverVersion } = require("@smpower-cli/get-npm-info");
+  const lastVersion = await getNpmSemverVersion(currentVersion, npmName);
+  if (lastVersion && semver.gt(lastVersion, currentVersion)) {
+    log.warn(
+      "发现新版本",
+      colors.yellow(
+        `请手动更新 ${npmName}，当前版本是 ${currentVersion}，最新版本是 ${lastVersion}\n更新命令 npm install -g ${npmName}`
+      )
+    );
+  }
+  // 3. 提取所有版本号，比对哪些版本号大于当前版本号
+  // 4. 获取最新的版本号，提示用户更新到该版本
 }
 
 async function checkEnv() {
@@ -36,7 +56,6 @@ async function checkEnv() {
     }
   });
   createDefaultConfig();
-  console.log("环境变量", process.env.CLI_HOME_PATH);
 }
 
 function createDefaultConfig() {
