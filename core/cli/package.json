@@ -1,6 +1,6 @@
 {
   "name": "@smpower-cli/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "smpower-cli core",
   "author": "若非 <rf.wangchn@foxmail.com>",
   "homepage": "",
@@ -23,8 +23,8 @@
     "test": "node ./__tests__/core.test.js"
   },
   "dependencies": {
-    "@smpower-cli/log": "file:../../utils/log",
     "@smpower-cli/get-npm-info": "file:../../utils/get-npm-info",
+    "@smpower-cli/log": "file:../../utils/log",
     "colors": "^1.4.0",
     "dotenv": "^16.0.3",
     "import-local": "^3.1.0",

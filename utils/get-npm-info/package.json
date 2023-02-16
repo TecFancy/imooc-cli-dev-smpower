@@ -1,6 +1,6 @@
 {
   "name": "@smpower-cli/get-npm-info",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "get npm info",
   "author": "smpower <rf.wangchn@foxmail.com>",
   "homepage": "https://github.com/smpower/smpower-cli-dev#readme",
