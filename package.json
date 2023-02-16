@@ -1,6 +1,5 @@
 {
   "name": "smpower-cli",
-  "private": true,
   "version": "1.0.0",
   "description": "smpower cli",
   "license": "MIT",
