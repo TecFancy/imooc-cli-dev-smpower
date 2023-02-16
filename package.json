@@ -1,17 +1,10 @@
 {
   "name": "smpower-cli",
-  "version": "1.0.0",
   "description": "smpower cli",
   "license": "MIT",
   "scripts": {
     "dev": "node core/cli/bin/index.js"
   },
-  "workspaces": [
-    "core/*",
-    "commands/*",
-    "models/*",
-    "utils/*"
-  ],
   "devDependencies": {
     "lerna": "^6.4.1"
   }

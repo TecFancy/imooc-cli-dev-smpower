@@ -4,6 +4,7 @@ module.exports = core;
 
 const path = require("path");
 const semver = require("semver");
+const commander = require("commander");
 const colors = require("colors/safe");
 const userHome = require("user-home");
 const log = require("@smpower-cli/log");
@@ -12,7 +13,8 @@ const constant = require("./const");
 const pkg = require("../package.json");
 
 let args;
-let config;
+
+const program = new commander.Command();
 
 async function core() {
   try {
@@ -23,9 +25,14 @@ async function core() {
     checkInputArgs();
     await checkEnv();
     await checkGlobalUpdate();
+    registerCommand();
   } catch (e) {
     log.error(e.message);
   }
+}
+
+function registerCommand() {
+  program.version(pkg.version);
 }
 
 async function checkGlobalUpdate() {
