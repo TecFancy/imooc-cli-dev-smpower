@@ -1,12 +1,9 @@
 {
-  "name": "@smpower-cli/log",
+  "name": "@imooc-cli-dev-smpower/log",
   "version": "1.0.8",
-  "description": "smpower-cli log",
-  "keywords": [
-    "log"
-  ],
-  "author": "若非 <rf.wangchn@foxmail.com>",
-  "homepage": "",
+  "description": "log",
+  "author": "smpower <rf.wangchn@foxmail.com>",
+  "homepage": "https://github.com/smpower/smpower-cli-dev/utils/log#readme",
   "license": "MIT",
   "main": "lib/index.js",
   "directories": {
@@ -19,8 +16,15 @@
   "publishConfig": {
     "registry": "https://registry.yarnpkg.com/"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smpower/smpower-cli-dev.git"
+  },
   "scripts": {
-    "test": "node ./__tests__/@smpower-cli/log.test.js"
+    "test": "node ./__tests__/index.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/smpower/smpower-cli-dev/issues"
   },
   "dependencies": {
     "npmlog": "^7.0.1"

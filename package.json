@@ -1,6 +1,6 @@
 {
-  "name": "smpower-cli",
-  "description": "smpower cli",
+  "name": "imooc-cli-dev-smpower",
+  "description": "smpower - imooc cli",
   "license": "MIT",
   "scripts": {
     "dev": "node core/cli/bin/index.js"

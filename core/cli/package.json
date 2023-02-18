@@ -1,9 +1,9 @@
 {
-  "name": "@smpower-cli/core",
+  "name": "@imooc-cli-dev-smpower/core",
   "version": "1.0.8",
-  "description": "smpower-cli core",
-  "author": "若非 <rf.wangchn@foxmail.com>",
-  "homepage": "",
+  "description": "cli",
+  "author": "smpower <rf.wangchn@foxmail.com>",
+  "homepage": "https://github.com/smpower/smpower-cli-dev/core/cli#readme",
   "license": "MIT",
   "main": "",
   "bin": {
@@ -20,7 +20,7 @@
     "registry": "https://registry.yarnpkg.com/"
   },
   "scripts": {
-    "test": "node ./__tests__/core.test.js"
+    "test": "node ./__tests__/index.test.js"
   },
   "dependencies": {
     "@smpower-cli/get-npm-info": "file:../../utils/get-npm-info",
