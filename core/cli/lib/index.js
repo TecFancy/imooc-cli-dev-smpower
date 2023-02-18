@@ -22,7 +22,7 @@ async function core() {
     checkNodeVersion();
     await rootCheck();
     await checkUserHome();
-    checkInputArgs();
+    // checkInputArgs();
     await checkEnv();
     await checkGlobalUpdate();
     registerCommand();
@@ -32,7 +32,43 @@ async function core() {
 }
 
 function registerCommand() {
-  program.version(pkg.version);
+  program
+    .usage("<command> [options]")
+    .version(pkg.version)
+    .option("-d, --debug", "是否开启调试模式", false)
+    .name(Object.keys(pkg.bin)[0])
+    .showHelpAfterError();
+
+  watchUnknowCmd();
+
+  if (!program.args.length < 3) {
+    program.outputHelp()
+    console.log();
+  }
+
+  program.parse(process.argv);
+  
+  enableDebugMod();
+}
+
+// 监听未知命令
+function watchUnknowCmd() {
+  program.on("command:*", function (obj) {
+    const availableCommands = program.commands.map((cmd) => cmd.name());
+    console.log(colors.red(`未知的命令 ${obj[0]}`));
+    if (availableCommands?.length) {
+      console.log(colors.red(`可用命令 ${availableCommands.join(",")}`));
+    }
+  });
+}
+
+// 开启 的bug 模式
+function enableDebugMod() {
+  const options = program.opts();
+  if (options.debug) process.env.LOG_LEVEL = "verbose";
+  else process.env.LOG_LEVEL = "info";
+  log.level = process.env.LOG_LEVEL;
+  log.verbose('debug mod...')
 }
 
 async function checkGlobalUpdate() {
