@@ -1,6 +1,6 @@
 {
   "name": "@imooc-cli-dev-smpower/get-npm-info",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "get npm info",
   "author": "smpower <rf.wangchn@foxmail.com>",
   "homepage": "https://github.com/smpower/smpower-cli-dev/utils/get-npm-info#readme",
