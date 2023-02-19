@@ -1,4 +1,4 @@
-# `utils`
+# `@imooc-cli-dev-smpower/utils`
 
 > TODO: description
 

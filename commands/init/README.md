@@ -1,11 +1,11 @@
-# `@imooc-cli-dev-smpower/core`
+# `init`
 
 > TODO: description
 
 ## Usage
 
 ```
-const core = require('core');
+const init = require('init');
 
 // TODO: DEMONSTRATE API
 ```

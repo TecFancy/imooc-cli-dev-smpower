@@ -1,4 +1,4 @@
-# `@smpower-cli/log`
+# `@imooc-cli-dev-smpower/log`
 
 > TODO: description
 

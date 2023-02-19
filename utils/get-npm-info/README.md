@@ -1,4 +1,4 @@
-# `@smpower-cli/get-npm-info`
+# `@imooc-cli-dev-smpower/get-npm-info`
 
 > TODO: description
 

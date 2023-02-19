@@ -3,7 +3,7 @@
   "version": "0.0.13",
   "description": "log",
   "author": "smpower <rf.wangchn@foxmail.com>",
-  "homepage": "https://github.com/smpower/smpower-cli-dev/utils/log#readme",
+  "homepage": "https://github.com/smpower/smpower-cli-dev",
   "license": "MIT",
   "main": "lib/index.js",
   "directories": {

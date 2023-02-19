@@ -7,7 +7,8 @@ const semver = require("semver");
 const commander = require("commander");
 const colors = require("colors/safe");
 const userHome = require("user-home");
-const log = require("@smpower-cli/log");
+const log = require("@imooc-cli-dev-smpower/log");
+const init = require("@imooc-cli-dev-smpower/init");
 
 const constant = require("./const");
 const pkg = require("../package.json");
@@ -39,15 +40,22 @@ function registerCommand() {
     .name(Object.keys(pkg.bin)[0])
     .showHelpAfterError();
 
+  program
+    .command("init [projectName]")
+    .option("-f, --force", "是否强制初始化项目")
+    .action(init);
+
   watchUnknowCmd();
 
   if (!program.args.length < 3) {
-    program.outputHelp()
+    program.outputHelp();
     console.log();
   }
 
+
   program.parse(process.argv);
-  
+
+
   enableDebugMod();
 }
 
@@ -68,7 +76,7 @@ function enableDebugMod() {
   if (options.debug) process.env.LOG_LEVEL = "verbose";
   else process.env.LOG_LEVEL = "info";
   log.level = process.env.LOG_LEVEL;
-  log.verbose('debug mod...')
+  log.verbose("debug mod...");
 }
 
 async function checkGlobalUpdate() {
@@ -76,7 +84,7 @@ async function checkGlobalUpdate() {
   const currentVersion = pkg.version;
   const npmName = pkg.name;
   // 2. 调用 npm API，获取所有版本号
-  const { getNpmSemverVersion } = require("@smpower-cli/get-npm-info");
+  const { getNpmSemverVersion } = require("@imooc-cli-dev-smpower/get-npm-info");
   const lastVersion = await getNpmSemverVersion(currentVersion, npmName);
   if (lastVersion && semver.gt(lastVersion, currentVersion)) {
     log.warn(

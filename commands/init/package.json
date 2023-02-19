@@ -1,0 +1,26 @@
+{
+  "name": "@imooc-cli-dev-smpower/init",
+  "version": "0.0.0",
+  "description": "imooc-cli-dev-smpower init",
+  "author": "smpower <rf.wangchn@foxmail.com>",
+  "homepage": "https://github.com/smpower/imooc-cli-dev-smpower#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smpower/imooc-cli-dev-smpower.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/index.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/smpower/imooc-cli-dev-smpower/issues"
+  }
+}
