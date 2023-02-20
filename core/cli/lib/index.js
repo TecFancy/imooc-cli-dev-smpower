@@ -13,19 +13,11 @@ const init = require("@imooc-cli-dev-smpower/init");
 const constant = require("./const");
 const pkg = require("../package.json");
 
-let args;
-
 const program = new commander.Command();
 
 async function core() {
   try {
-    checkPkgVersion();
-    checkNodeVersion();
-    await rootCheck();
-    await checkUserHome();
-    // checkInputArgs();
-    await checkEnv();
-    await checkGlobalUpdate();
+    await prepare();
     registerCommand();
   } catch (e) {
     log.error(e.message);
@@ -34,10 +26,11 @@ async function core() {
 
 function registerCommand() {
   program
+    .name(Object.keys(pkg.bin)[0])
     .usage("<command> [options]")
     .version(pkg.version)
     .option("-d, --debug", "是否开启调试模式", false)
-    .name(Object.keys(pkg.bin)[0])
+    .option("-tp, --targetPath <targetPath>", "是否指定本地调试文件路径", "")
     .showHelpAfterError();
 
   program
@@ -46,17 +39,32 @@ function registerCommand() {
     .action(init);
 
   watchUnknowCmd();
+  setTargetPathEnv();
 
-  if (!program.args.length < 3) {
+  if (program.args.length < 3) {
     program.outputHelp();
     console.log();
   }
 
-
   program.parse(process.argv);
 
-
   enableDebugMod();
+}
+
+async function prepare() {
+  checkPkgVersion();
+  checkNodeVersion();
+  await rootCheck();
+  await checkUserHome();
+  await checkEnv();
+  await checkGlobalUpdate();
+}
+
+// 设置 targetPath 环境变量
+function setTargetPathEnv() {
+  program.on("option:targetPath", function () {
+    process.env.CLI_TARGET_PATH = program.getOptionValue("targetPath");
+  });
 }
 
 // 监听未知命令
@@ -84,7 +92,9 @@ async function checkGlobalUpdate() {
   const currentVersion = pkg.version;
   const npmName = pkg.name;
   // 2. 调用 npm API，获取所有版本号
-  const { getNpmSemverVersion } = require("@imooc-cli-dev-smpower/get-npm-info");
+  const {
+    getNpmSemverVersion,
+  } = require("@imooc-cli-dev-smpower/get-npm-info");
   const lastVersion = await getNpmSemverVersion(currentVersion, npmName);
   if (lastVersion && semver.gt(lastVersion, currentVersion)) {
     log.warn(
@@ -119,18 +129,6 @@ function createDefaultConfig() {
     cliConfig["cliHome"] = path.join(userHome, constant.DEFAULT_CLI_HOME);
   }
   process.env.CLI_HOME_PATH = cliConfig.cliHome;
-}
-
-function checkInputArgs() {
-  const minimist = require("minimist");
-  args = minimist(process.argv.slice(2));
-  checkArgs();
-}
-
-function checkArgs() {
-  if (args.debug) process.env.LOG_LEVEL = "verbose";
-  else process.env.LOG_LEVEL = "info";
-  log.level = process.env.LOG_LEVEL;
 }
 
 async function checkUserHome() {

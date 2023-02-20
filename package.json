@@ -2,10 +2,17 @@
   "name": "imooc-cli-dev-smpower",
   "description": "smpower - imooc cli",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "dev": "node core/cli/bin/index.js"
   },
   "devDependencies": {
     "lerna": "^6.4.1"
-  }
+  },
+  "workspaces": [
+    "core/*",
+    "commands/*",
+    "models/*",
+    "utils/*"
+  ]
 }
