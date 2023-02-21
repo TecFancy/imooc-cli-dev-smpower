@@ -35,6 +35,8 @@
 
 "@imooc-cli-dev-smpower/exec@file:core/exec":
   version "0.0.14"
+  dependencies:
+    "@imooc-cli-dev-smpower/package" "file:../../Library/Caches/Yarn/v6/npm-@imooc-cli-dev-smpower-exec-0.0.14-6e2f8512-38d6-4df0-a390-37e630461965-1676993998502/node_modules/models/package"
 
 "@imooc-cli-dev-smpower/get-npm-info@file:utils/get-npm-info":
   version "0.0.14"
@@ -50,6 +52,9 @@
   version "0.0.14"
   dependencies:
     npmlog "^7.0.1"
+
+"@imooc-cli-dev-smpower/package@file:models/package":
+  version "0.0.0"
 
 "@isaacs/string-locale-compare@^1.1.0":
   version "1.1.0"

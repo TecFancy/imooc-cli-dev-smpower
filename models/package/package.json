@@ -1,7 +1,7 @@
 {
-  "name": "@imooc-cli-dev-smpower/exec",
-  "version": "0.0.14",
-  "description": "imooc-cli-dev-smpower execute",
+  "name": "@imooc-cli-dev-smpower/package",
+  "version": "0.0.0",
+  "description": "imooc-cli-dev-smpower npm modules",
   "author": "smpower <rf.wangchn@foxmail.com>",
   "homepage": "https://github.com/smpower/imooc-cli-dev-smpower#readme",
   "license": "MIT",
@@ -25,8 +25,5 @@
   },
   "bugs": {
     "url": "https://github.com/smpower/imooc-cli-dev-smpower/issues"
-  },
-  "dependencies": {
-    "@imooc-cli-dev-smpower/package": "file:../../models/package"
   }
 }
