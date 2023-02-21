@@ -8,6 +8,7 @@ const commander = require("commander");
 const colors = require("colors/safe");
 const userHome = require("user-home");
 const log = require("@imooc-cli-dev-smpower/log");
+const exec = require("@imooc-cli-dev-smpower/exec");
 const init = require("@imooc-cli-dev-smpower/init");
 
 const constant = require("./const");
@@ -36,7 +37,7 @@ function registerCommand() {
   program
     .command("init [projectName]")
     .option("-f, --force", "是否强制初始化项目")
-    .action(init);
+    .action(exec);
 
   watchUnknowCmd();
   setTargetPathEnv();
